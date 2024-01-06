@@ -1,0 +1,28 @@
+Git: software de control de versions. Es lliure. Del creador de Linux
+
+git bash es la consola de GIt
+
+git init: comanda que s'executa un cop a l'inici del projecte, ens crea el repositori. S'executa des de el dir del projecte
+ens crea staging area i el rep local.
+
+git add: afegeix un arxiu al control de versions. El posa a la staging area. Ex. git add index.html (és case sensitive)
+        Tot arxiu nou o arxiu modificat cal posar-lo al staging abans de fer el commit
+git add . : afegeix tots els arxius del directori
+
+git commit: passa els arxius de la staging area al repositori local. Cal donar una desc. Ex git commit -m "inici projecte"
+git commit -am "descripcio": passa al staging i al commit de cop.
+
+git status -s: ens mostra l'estat dels arxius del directori (els del repo no modificats no els mostra)
+                ?? vol dir que no esta controlat
+                A vol dir afegir al staging
+                M està en el repositori i està modificat, cal fer git add abans de fer commit
+                    Si M es vermell cal fer add, si M es verd es pot fer commit (ja hem fet add)
+
+git log --oneline: per veure el llistat de commits fets
+
+git reset --hard codiversio: per restaurar una versió
+
+git remote add origin https://github.com/davidjove/Guies.git
+git branch -M main
+git push -u origin main
+

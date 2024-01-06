@@ -1,0 +1,88 @@
+https://developer.salesforce.com/docs/platform/lwc/guide/get-started-introduction.html
+
+// els comentaris:
+<!-- Each BoatTile goes here -->
+
+// COM FER IF EN HTML
+---------------------
+<template if:true={loading}>
+		// el que sigui quan estem carregant com mostrar un spinner
+ </template>
+
+// per comprovar si tenim dades 
+ <template if:true={accounts.data}>
+        // el que sigui
+</template>
+// o tenim error
+<template if:true={accounts.error}>
+                {accounts.error}
+</template>
+
+// COM ITERAR EN HTML
+---------------------
+export default class AccountListForEachLWC extends LightningElement {
+    @wire(getAccountList) accounts; // on getAccountList retorna List<Account>
+}
+// Ull: sempre s'ha de posar ID en cada Item
+<template for:each={accounts.data} for:item="acc">
+        <p key={acc.Id}>{acc.Name}</p>
+</template>
+<template for:each={contacts} for:item="contact">
+        <li key={contact.Id}>{contact.Name}, {contact.Title}</li>
+</template>
+// o be
+<template iterator:it={accounts.data}>
+    <p key={it.value.Id}>
+        {it.value.Name}
+        {it.first}, {it.index}, {it.last}
+    </p>
+</template>
+iterator te les seguents propietats:
+    value—The value of the item in the list. Use this property to access the properties of the array. For example, iteratorName.value.propertyName.
+    index—The index of the item in the list.
+    first—A boolean value indicating whether this item is the first item in the list.
+    last—A boolean value indicating whether this item is the last item in the list.
+
+// MOSTRAR UN spinner
+----------------------
+<template if:true={isLoading}>
+    <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+</template>
+
+// COMBO
+-----------
+<lightning-combobox class="slds-align-middle"
+        name="boatSearchForType"
+        value={selectedBoatTypeId}
+        placeholder="All Types"
+        options={searchOptions}
+        onchange={handleSearchOptionChange}
+        >
+</lightning-combobox>
+
+// FORMATEJAR NUM
+-----------------  
+<div class="slds-text-body_small">
+    Price: <lightning-formatted-number value={boat.Price__c} maximum-fraction-digits="2"></lightning-formatted-number>
+</div>
+
+// MOSTRAR mapa
+---------------------
+<template if:true={showMap}>
+    <lightning-map map-markers={mapMarkers} zoom-level="10"></lightning-map>
+</template>
+
+  
+// META XML
+-----------
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets> 
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+</LightningComponentBundle>
+
